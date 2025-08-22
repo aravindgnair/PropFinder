@@ -1,0 +1,6 @@
+@PropFinder.API_HostAddress = http://localhost:5005
+
+GET {{PropFinder.API_HostAddress}}/properties/
+Accept: application/json
+
+###

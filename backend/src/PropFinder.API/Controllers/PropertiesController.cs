@@ -20,7 +20,7 @@ public class PropertiesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get(string? type, decimal? minPrice, decimal? maxPrice)
     {
         var properties = await _propertyService.GetPropertiesAsync(null, null, null);
         

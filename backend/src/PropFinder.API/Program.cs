@@ -6,6 +6,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<PropFinderDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(
+            "http://localhost:60606",
+            "https://propfinder.azurestaticapps.net"
+            ).AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddInfrastructure();
 
@@ -15,6 +26,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCors("AllowFrontend");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -22,7 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

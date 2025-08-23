@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropFinder.Domain", "src\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropFinder.Infrastructure", "src\PropFinder.Infrastructure\PropFinder.Infrastructure.csproj", "{B77B0A61-6798-4099-9F9C-24AC96D056C4}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "propfinder.app", "..\PropFinder.App\propfinder.app.esproj", "{13481D9C-D4E4-4DC6-2EE1-413071DA7728}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{B77B0A61-6798-4099-9F9C-24AC96D056C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B77B0A61-6798-4099-9F9C-24AC96D056C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B77B0A61-6798-4099-9F9C-24AC96D056C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13481D9C-D4E4-4DC6-2EE1-413071DA7728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13481D9C-D4E4-4DC6-2EE1-413071DA7728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13481D9C-D4E4-4DC6-2EE1-413071DA7728}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{13481D9C-D4E4-4DC6-2EE1-413071DA7728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13481D9C-D4E4-4DC6-2EE1-413071DA7728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13481D9C-D4E4-4DC6-2EE1-413071DA7728}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

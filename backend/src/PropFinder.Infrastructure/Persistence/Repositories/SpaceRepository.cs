@@ -1,27 +1,41 @@
-﻿using PropFinder.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PropFinder.Application.Interfaces;
 using PropFinder.Domain.Entities;
 
 namespace PropFinder.Infrastructure.Persistence.Repositories;
 
-public class SpaceRepository : ISpaceRepository
+public class SpaceRepository(PropFinderDbContext context) : ISpaceRepository
 {
-    public Task AddAsync(Space space)
+    private readonly PropFinderDbContext _context = context;
+
+    public async Task<IEnumerable<Space>> GetAllAsync(Guid? propertyId, string? type, float? minSize)
     {
-        throw new NotImplementedException();
+        var query = _context.Spaces.AsQueryable();
+
+        if (propertyId.HasValue)
+            query = query.Where(s => s.PropertyId == propertyId.Value);
+
+        if (!string.IsNullOrEmpty(type))
+            query = query.Where(s => s.Type == type);
+
+        if (minSize.HasValue)
+            query = query.Where(s => s.Size >= minSize.Value);
+
+        return await query.ToListAsync();
     }
 
-    public Task<IEnumerable<Space>> GetAllAsync(Guid? propertyId, string? type, float? minSize)
+    public async Task<Space?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Spaces.FindAsync(id);
     }
 
-    public Task<Space?> GetByIdAsync(Guid id)
+    public async Task AddAsync(Space space)
     {
-        throw new NotImplementedException();
+        await _context.Spaces.AddAsync(space);
     }
 
-    public Task SaveChangesAsync()
+    public async Task SaveChangesAsync()
     {
-        throw new NotImplementedException();
+        await _context.SaveChangesAsync();
     }
 }

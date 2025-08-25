@@ -29,7 +29,7 @@ public class PropertyConfiguration : IEntityTypeConfiguration<Property>
                .HasMaxLength(1000);
 
         builder.HasMany(p => p.Spaces)
-               .WithOne()
+               .WithOne(s => s.Property)
                .HasForeignKey(s => s.PropertyId)
                .OnDelete(DeleteBehavior.Cascade);
     }

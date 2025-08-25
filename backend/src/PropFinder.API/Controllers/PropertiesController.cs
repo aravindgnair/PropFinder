@@ -40,6 +40,9 @@ public class PropertiesController : ControllerBase
     {
         var newProperty = await _propertyService.CreatePropertyAsync(property);
 
+        if (newProperty == null)
+            return NotFound("Property not found.");
+
         return Ok(newProperty);
     }
 }

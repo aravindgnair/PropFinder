@@ -61,14 +61,12 @@ public class PropertyService : IPropertyService
     {
         var property = new Property
         {
-            Id = Guid.NewGuid(),
             Address = dto.Address,
             Type = dto.Type,
             Price = dto.Price,
             Description = dto.Description,
             Spaces = dto.Spaces?.Select(s => new Space
             {
-                Id = Guid.NewGuid(),
                 Type = s.Type,
                 Size = s.Size,
                 Description = s.Description
@@ -76,6 +74,7 @@ public class PropertyService : IPropertyService
         };
 
         await _propertyRepository.AddAsync(property);
+        await _propertyRepository.SaveChangesAsync();
 
         return await GetPropertyByIdAsync(property.Id) ?? throw new Exception("Failed to create property.");
     }

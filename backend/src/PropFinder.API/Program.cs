@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PropFinder.Infrastructure;
 using PropFinder.Infrastructure.Persistence;
+using PropFinder.Infrastructure.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,10 +36,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var db = services.GetRequiredService<PropFinderDbContext>();
+
+    db.Database.Migrate();         // Apply migrations
+    SeedData.Initialize(db);       // Seed sample data
+}
 
 app.Run();
